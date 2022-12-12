@@ -1,0 +1,16 @@
+const {CampaignOwner} = require('../db_models/db_models')
+
+class ownerController {
+    async createOwner(req, res, next) {        
+        let {cryptoAddress, username} = req.body
+        const owner = await CampaignOwner.create({cryptoAddress, username})       
+        return res.json(owner)        
+    }
+    async createCampaign(req, res, next) {        
+        let {name, description, price, expirationDate} = req.body
+        const campaign = await CampaignOwner.create({name, description, price, expirationDate})       
+        return res.json(campaign)        
+    }
+}
+
+module.exports = new ownerController()
