@@ -1,4 +1,4 @@
-const {CampaignOwner} = require('../db_models/db_models')
+const {CampaignOwner, Campaign} = require('../db_models/db_models')
 
 class ownerController {
     async createOwner(req, res, next) {        
@@ -8,8 +8,8 @@ class ownerController {
     }
     async createCampaign(req, res, next) {        
         let {name, description, price, expirationDate} = req.body
-        const campaign = await CampaignOwner.create({name, description, price, expirationDate})       
-        return res.json(campaign)        
+        const campaign = await Campaign.create({name, description, price, expirationDate})       
+        return res.json(campaign)
     }
 }
 
