@@ -7,8 +7,8 @@ class ownerController {
         return res.json(owner)        
     }
     async createCampaign(req, res, next) {        
-        let {name, description, price, expirationDate} = req.body
-        const campaign = await Campaign.create({name, description, price, expirationDate})       
+        let {name, description, price, expirationDate, status} = req.body
+        const campaign = await Campaign.create({name, description, price, expirationDate, status})       
         return res.json(campaign)
     }
 }

@@ -12,7 +12,8 @@ const Campaign = sequelize.define('campaign', {
     name: {type: DataTypes.STRING, unique: true, allowNull: false},
     description: {type: DataTypes.STRING, allowNull: false},
     price: {type: DataTypes.INTEGER, allowNull: false},
-    expirationDate: {type: DataTypes.DATEONLY}    
+    expirationDate: {type: DataTypes.DATEONLY},
+    status: {type: DataTypes.STRING, allowNull: false}
 })
 
 

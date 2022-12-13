@@ -15,12 +15,12 @@ function CampaignList() {
         <Row className='justify-content-md-center'>   
           <Col md={3}>
             <ListGroup>
-              {campaign.map(info =>
+              {campaign.map(info => 
                   <Card 
                     className="text-center mt-4"      
                     key={info.alphanumericId}
                   >
-                      <Card.Header>Owner</Card.Header>
+                      <Card.Header>{info.status}</Card.Header>
                       <Card.Body>
                         <Card.Title>{info.name}</Card.Title>
                         <Card.Text>
@@ -28,7 +28,7 @@ function CampaignList() {
                         </Card.Text>
                         <Button variant="primary" onClick={() => setDonationVisible(true)}>More details</Button>
                       </Card.Body>
-                  </Card>
+                  </Card>   
               )}
             </ListGroup>
           </Col>
