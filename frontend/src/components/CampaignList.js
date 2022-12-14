@@ -6,6 +6,7 @@ import CreateDonation from './modals/CreateDonation'
 function CampaignList() {
     const [donationVisible, setDonationVisible] = useState(false)
     const [campaign, setCampaign] = useState([])
+    const [currCampaign, setCurrCampaign] = useState({})
     useEffect(() => {    
       fetchCampaign().then(data => setCampaign([...data]))
     }, [])
@@ -26,7 +27,7 @@ function CampaignList() {
                         <Card.Text>
                         {info.description}
                         </Card.Text>
-                        <Button variant="primary" onClick={() => setDonationVisible(true)}>More details</Button>
+                        <Button variant="primary" onClick={() => { setDonationVisible(true); setCurrCampaign(info);}}>More details</Button>
                       </Card.Body>
                   </Card>   
               )}
@@ -34,7 +35,7 @@ function CampaignList() {
           </Col>
         </Row>
 
-        <CreateDonation show={donationVisible} onHide={() => setDonationVisible(false)}/>
+        <CreateDonation show={donationVisible} currCampaign={currCampaign} onHide={() => setDonationVisible(false)}/>
 
       </Container>    
     );

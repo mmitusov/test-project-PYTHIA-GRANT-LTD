@@ -1,7 +1,15 @@
-import { Button, Dropdown, Form, Modal } from 'react-bootstrap'
+import { useState } from 'react'
+import { Button, Form, Modal } from 'react-bootstrap'
+import { campaignDonation } from '../../http/campaignAPI'
 
-const CreateDonation = ({show, onHide}) => {
-  const donationType = ['active','successful','expired','fraud']
+const CreateDonation = ({currCampaign, show, onHide}) => {
+  const [name, setName] = useState('')
+  const [price, setPrice] = useState(0)
+  const addDonation = () => {
+    campaignDonation(currCampaign.name, name, price).then(data => {setName(''); setPrice(0);})
+    onHide()
+  }
+
   return (
     <Modal
     show={show}
@@ -11,39 +19,31 @@ const CreateDonation = ({show, onHide}) => {
   >
     <Modal.Header closeButton>
       <Modal.Title id="contained-modal-title-vcenter">
-        Add new donation
+        {`${currCampaign.name} is currently: ${currCampaign.status}`}
       </Modal.Title>
     </Modal.Header>
+
     <Modal.Body>
       <Form>
-        
-        <div className='d-flex justify-content-around'>
-          <Dropdown className='mt-3 mb-3'>
-            <Dropdown.Toggle>{'Set campaign statuses'}</Dropdown.Toggle>
-              <Dropdown.Menu>{donationType.map((type, i) => 
-                <Dropdown.Item key={i}>
-                  {type}
-                </Dropdown.Item>
-              )}</Dropdown.Menu>
-          </Dropdown>
-        </div>
-
         <Form.Control 
           className='mt-3'
           placeholder='Your Name'
+          value={name}
+          onChange={(e) => {setName(e.target.value)}}
         />
         <Form.Control 
           className='mt-3'
           placeholder='Amount'
           type='number'
+          value={price}
+          onChange={(e) => {setPrice(e.target.value)}}
         />
-
         <hr/>
-
       </Form>
     </Modal.Body>
+
     <Modal.Footer>
-      <Button variant='outline-success' onClick={onHide}>Donate</Button>
+      <Button variant='outline-success' onClick={() => addDonation()}>Donate</Button>
       <Button variant='outline-danger' onClick={onHide}>Close</Button>
     </Modal.Footer>
   </Modal>

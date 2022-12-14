@@ -5,7 +5,9 @@ export const fetchCampaign = async () => {
     return data
 }
 
-export const fetchOnefetchCampaign = async (id) => {
-    const {data} = await $host.get('api/donator/one' + id)
+export const campaignDonation = async (campaignName, donatorUsername, donationAmount) => {
+    const {data} = await $host.post('api/donator/donation', {
+        campaignName, donatorUsername, donationAmount
+    })
     return data
 }
